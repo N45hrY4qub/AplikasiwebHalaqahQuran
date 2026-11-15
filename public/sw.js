@@ -1,21 +1,29 @@
-const CACHE_NAME = 'monitoring-halaqah-cache-v4';
+const CACHE_NAME = 'monitoring-halaqah-cache-v5';
 const ASSETS_TO_CACHE = [
   '/',
   '/index.html',
   '/manifest.json'
 ];
 
-// Install Event - cache the initial files
+// Install Event - cache initial files WITHOUT forcing skipWaiting() in the background
 self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
       console.log('[Service Worker] Caching app shell assets');
       return cache.addAll(ASSETS_TO_CACHE);
-    }).then(() => self.skipWaiting())
+    })
   );
 });
 
-// Activate Event - clean up older caches
+// Listen for explicit SKIP_WAITING message from the app UI ("Perbarui Sekarang")
+self.addEventListener('message', (event) => {
+  if (event.data && event.data.type === 'SKIP_WAITING') {
+    console.log('[Service Worker] SKIP_WAITING received, activating new version...');
+    self.skipWaiting();
+  }
+});
+
+// Activate Event - clean up older caches and claim active clients
 self.addEventListener('activate', (event) => {
   event.waitUntil(
     caches.keys().then((cacheNames) => {
@@ -109,4 +117,3 @@ self.addEventListener('fetch', (event) => {
     })
   );
 });
-

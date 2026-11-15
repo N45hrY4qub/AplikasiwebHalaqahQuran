@@ -36,6 +36,7 @@ import { HalaqahSelector } from './components/HalaqahSelector';
 import { getTeacherHalaqahs, normalizeHalaqahKey } from './utils/studentAttendanceHelper';
 import { parseAndValidateSnapshot } from './utils/backupRestoreManager';
 import { PwaInstallBanner } from './components/PwaInstallBanner';
+import { SwUpdateToast } from './components/SwUpdateToast';
 import { IslamicHeaderOrnament } from './components/IslamicHeaderOrnament';
 import { getSharedState, isFirebaseConfigured, parseFirebaseConfigInput, getActiveFirebaseConfig } from './lib/firebaseShare';
 import { resolveInstitutionName, DEFAULT_INSTITUTION_NAME } from './utils/brandingHelper';
@@ -1731,6 +1732,7 @@ export default function App() {
   return (
     <AppProvider>
       <AppContent />
+      <SwUpdateToast />
     </AppProvider>
   );
 }
