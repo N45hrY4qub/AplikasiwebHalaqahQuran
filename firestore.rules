@@ -1,0 +1,200 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Global catch-all default deny
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Admins
+    match /admins/{id} {
+      allow read, write: if true;
+    }
+
+    // Gurus
+    match /gurus/{id} {
+      allow read, write: if true;
+    }
+
+    // Siswas
+    match /siswas/{id} {
+      allow read, write: if true;
+    }
+
+    // Kelases
+    match /kelases/{id} {
+      allow read, write: if true;
+    }
+
+    // Halaqahs
+    match /halaqahs/{id} {
+      allow read, write: if true;
+    }
+
+    // Moduls
+    match /moduls/{id} {
+      allow read, write: if true;
+    }
+
+    // Setorans
+    match /setorans/{id} {
+      allow read, write: if true;
+    }
+
+    // AuditLogs
+    match /auditLogs/{id} {
+      allow read, write: if true;
+    }
+
+    // ChatMessages
+    match /chatMessages/{id} {
+      allow read, write: if true;
+    }
+
+    // VirtualMeetings
+    match /virtualMeetings/{id} {
+      allow read, write: if true;
+    }
+
+    // ElemenSettings
+    match /elemenSettings/{id} {
+      allow read, write: if true;
+    }
+
+    // SharedStates for instant portal share keys
+    match /shared_states/{id} {
+      allow read, write: if true;
+      
+      match /chunks/{chunkId} {
+        allow read, write: if true;
+      }
+    }
+
+    // ModulPages (segmented high-res images)
+    match /modulPages/{id} {
+      allow read, write: if true;
+    }
+
+    // Connection Ping Tests
+    match /test_connection_ping/{id} {
+      allow read, write: if true;
+    }
+
+    // MurojaahBerpasangans
+    match /murojaahBerpasangans/{id} {
+      allow read, write: if true;
+    }
+
+    // JenisAssessments
+    match /jenisAssessments/{id} {
+      allow read, write: if true;
+    }
+
+    // TemplateAssessments
+    match /templateAssessments/{id} {
+      allow read, write: if true;
+    }
+
+    // AssessmentRecords
+    match /assessmentRecords/{id} {
+      allow read, write: if true;
+    }
+
+    // Syahadahs
+    match /syahadahs/{id} {
+      allow read, write: if true;
+    }
+
+    // PengajuanAssessments
+    match /pengajuan_assessments/{id} {
+      allow read, write: if true;
+    }
+
+    // SyahadahRules
+    match /syahadahRules/{id} {
+      allow read, write: if true;
+    }
+
+    // MataPelajarans
+    match /mataPelajarans/{id} {
+      allow read, write: if true;
+    }
+
+    // TajwidCategories
+    match /tajwidCategories/{id} {
+      allow read, write: if true;
+    }
+
+    // Program Keilmuan (LMS) Collections
+    match /programs/{id} {
+      allow read, write: if true;
+    }
+    match /programBabs/{id} {
+      allow read, write: if true;
+    }
+    match /programMateris/{id} {
+      allow read, write: if true;
+    }
+    match /programLatihans/{id} {
+      allow read, write: if true;
+    }
+    match /programAsesmens/{id} {
+      allow read, write: if true;
+    }
+    match /programAsesmenSettings/{id} {
+      allow read, write: if true;
+    }
+    match /programPraktikSettings/{id} {
+      allow read, write: if true;
+    }
+    match /programEnrollments/{id} {
+      allow read, write: if true;
+    }
+
+    // AppSettings
+    match /appSettings/{id} {
+      allow read, write: if true;
+    }
+
+    // Pengumumans (Board of announcements)
+    match /pengumumans/{id} {
+      allow read, write: if true;
+    }
+
+    // Administrasi Guru: Capaian Pembelajaran (CP)
+    match /capaianPembelajarans/{id} {
+      allow read, write: if true;
+    }
+
+    // Administrasi Guru: Tujuan Pembelajaran (TP)
+    match /tujuanPembelajarans/{id} {
+      allow read, write: if true;
+    }
+
+    // Administrasi Guru: Bank Aktivitas Pembelajaran
+    match /bankAktivitas/{id} {
+      allow read, write: if true;
+    }
+
+    // Administrasi Guru: Template RPP Master Admin
+    match /rppTemplates/{id} {
+      allow read, write: if true;
+    }
+
+    // Administrasi Guru: Dokumen RPP Guru
+    match /guruRppList/{id} {
+      allow read, write: if true;
+    }
+
+    // Instrumen Capaian Bacaan Ayat
+    match /capaianBacaanConfigs/{id} {
+      allow read, write: if true;
+    }
+    match /capaianBacaanSesiList/{id} {
+      allow read, write: if true;
+    }
+    match /capaianBacaanTrialSettings/{id} {
+      allow read, write: if true;
+    }
+  }
+}

@@ -1,0 +1,854 @@
+{
+  "entities": {
+    "Admin": {
+      "title": "Admin",
+      "description": "Administrator account metadata and status",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "namaLengkap": { "type": "string" },
+        "email": { "type": "string" },
+        "nomorHp": { "type": "string" },
+        "fotoProfil": { "type": "string" },
+        "status": { "type": "string", "enum": ["Aktif", "Nonaktif"] },
+        "tanggalDibuat": { "type": "string" },
+        "colorTheme": { "type": "object" }
+      },
+      "required": ["id", "namaLengkap", "email", "nomorHp"]
+    },
+    "Guru": {
+      "title": "Guru",
+      "description": "Teacher/pembimbing profiles",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "namaLengkap": { "type": "string" },
+        "jabatan": { "type": "string" },
+        "email": { "type": "string" },
+        "nomorHp": { "type": "string" },
+        "jenisKelamin": { "type": "string" },
+        "alamat": { "type": "string" },
+        "fotoProfil": { "type": "string" },
+        "halaqahBimbinganId": { "type": "string" },
+        "halaqahBimbinganNama": { "type": "string" },
+        "status": { "type": "string", "enum": ["Aktif", "Nonaktif"] },
+        "tanggalDibuat": { "type": "string" },
+        "colorTheme": { "type": "object" }
+      },
+      "required": ["id", "namaLengkap", "email", "status"]
+    },
+    "Siswa": {
+      "title": "Siswa",
+      "description": "Siswa/santri profile records",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "nis": { "type": "string" },
+        "namaLengkap": { "type": "string" },
+        "kelasId": { "type": "string" },
+        "kelasNama": { "type": "string" },
+        "halaqahId": { "type": "string" },
+        "halaqahNama": { "type": "string" },
+        "email": { "type": "string" },
+        "nomorHpOrangTua": { "type": "string" },
+        "jenisKelamin": { "type": "string" },
+        "tanggalLahir": { "type": "string" },
+        "alamat": { "type": "string" },
+        "fotoProfil": { "type": "string" },
+        "status": { "type": "string", "enum": ["Aktif", "Nonaktif"] },
+        "tanggalDibuat": { "type": "string" },
+        "colorTheme": { "type": "object" }
+      },
+      "required": ["id", "nis", "namaLengkap", "status"]
+    },
+    "Kelas": {
+      "title": "Kelas",
+      "description": "Class specifications",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "namaKelas": { "type": "string" },
+        "jenjang": { "type": "string" },
+        "tahunAjaran": { "type": "string" },
+        "waliKelasId": { "type": "string" },
+        "waliKelasNama": { "type": "string" }
+      },
+      "required": ["id", "namaKelas"]
+    },
+    "Halaqah": {
+      "title": "Halaqah",
+      "description": "Halaqah student circles under teachers",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "namaHalaqah": { "type": "string" },
+        "guruPembimbingId": { "type": "string" },
+        "guruPembimbingNama": { "type": "string" },
+        "kapasitasPeserta": { "type": "number" },
+        "keterangan": { "type": "string" },
+        "status": { "type": "string" },
+        "warnaIdentitas": { "type": "string" }
+      },
+      "required": ["id", "namaHalaqah"]
+    },
+    "Modul": {
+      "title": "Modul",
+      "description": "Quran and non-Quran teaching materials",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "tipe": { "type": "string", "enum": ["Al-Quran", "Selain Al-Quran"] },
+        "namaSurat": { "type": "string" },
+        "nomorUrutSurat": { "type": "number" },
+        "jumlahAyat": { "type": "number" },
+        "judulModul": { "type": "string" },
+        "kategoriModul": { "type": "string" }
+      },
+      "required": ["id", "tipe"]
+    },
+    "Setoran": {
+      "title": "Setoran",
+      "description": "Student hafalan deposits, records, and evaluations",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "siswaId": { "type": "string" },
+        "siswaNama": { "type": "string" },
+        "siswaNis": { "type": "string" },
+        "halaqahId": { "type": "string" },
+        "halaqahNama": { "type": "string" },
+        "guruId": { "type": "string" },
+        "guruNama": { "type": "string" },
+        "modulId": { "type": "string" },
+        "modulNama": { "type": "string" },
+        "tipeModul": { "type": "string" },
+        "catatanGuru": { "type": "string" },
+        "nilai": { "type": "string" },
+        "statusLulus": { "type": "boolean" },
+        "tanggalSetoran": { "type": "string" },
+        "canvasStrokesKeys": { "type": "string" },
+        "canvasPinsKeys": { "type": "string" },
+        "nonQuranJilid": { "type": "number" },
+        "nonQuranPageAwal": { "type": "number" },
+        "nonQuranPageAkhir": { "type": "number" },
+        "nonQuranHalamanTunggal": { "type": "boolean" },
+        "interactiveComments": { "type": "array" }
+      },
+      "required": ["id", "siswaId", "siswaNama", "nilai", "tanggalSetoran"]
+    },
+    "AuditLog": {
+      "title": "AuditLog",
+      "description": "System operational trace logs",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "timestamp": { "type": "string" },
+        "actorNama": { "type": "string" },
+        "actorRole": { "type": "string" },
+        "action": { "type": "string" },
+        "rincian": { "type": "string" }
+      },
+      "required": ["id", "timestamp", "actorNama", "action"]
+    },
+    "ChatMessage": {
+      "title": "ChatMessage",
+      "description": "Real-time communication message blocks",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "senderId": { "type": "string" },
+        "senderNama": { "type": "string" },
+        "senderRole": { "type": "string" },
+        "receiverId": { "type": "string" },
+        "receiverNama": { "type": "string" },
+        "receiverRole": { "type": "string" },
+        "message": { "type": "string" },
+        "timestamp": { "type": "string" }
+      },
+      "required": ["id", "senderId", "message", "timestamp"]
+    },
+    "VirtualMeeting": {
+      "title": "VirtualMeeting",
+      "description": "Online video conference classes",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "halaqahId": { "type": "string" },
+        "halaqahNama": { "type": "string" },
+        "guruId": { "type": "string" },
+        "guruNama": { "type": "string" },
+        "agenda": { "type": "string" },
+        "isActive": { "type": "boolean" },
+        "meetingUrl": { "type": "string" },
+        "startTime": { "type": "string" },
+        "participantsCount": { "type": "number" }
+      },
+      "required": ["id", "title", "meetingUrl", "isActive"]
+    },
+    "ElemenSetting": {
+      "title": "ElemenSetting",
+      "description": "Syllabus custom scoring element configure templates",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "nama": { "type": "string" },
+        "tipeModul": { "type": "string" },
+        "jenisSetoranList": { "type": "array" },
+        "kompetensi": { "type": "string" },
+        "referensiModulId": { "type": "string" }
+      },
+      "required": ["id", "nama", "tipeModul", "jenisSetoranList"]
+    },
+    "SharedState": {
+      "title": "SharedState",
+      "description": "Database sharing packages",
+      "type": "object",
+      "properties": {
+        "dataJson": { "type": "string" },
+        "isCompressed": { "type": "boolean" },
+        "isChunked": { "type": "boolean" },
+        "chunkCount": { "type": "number" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["createdAt"]
+    },
+    "ModulPage": {
+      "title": "ModulPage",
+      "description": "Individual pages containing high-res module image content",
+      "type": "object",
+      "properties": {
+        "modulId": { "type": "string" },
+        "jilidIdx": { "type": "number" },
+        "pageIdx": { "type": "number" },
+        "imageUrl": { "type": "string" }
+      },
+      "required": ["modulId", "jilidIdx", "pageIdx", "imageUrl"]
+    },
+    "PingConnection": {
+      "title": "PingConnection",
+      "description": "Simple document used to test Firestore backend connectivity",
+      "type": "object",
+      "properties": {
+        "status": { "type": "string" }
+      }
+    },
+    "MurojaahBerpasangan": {
+      "title": "MurojaahBerpasangan",
+      "description": "Activity logs for partnered student murojaah sessions",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "tanggal": { "type": "string" },
+        "siswaId": { "type": "string" },
+        "siswaNama": { "type": "string" },
+        "halaqahId": { "type": "string" },
+        "halaqahNama": { "type": "string" },
+        "pasanganId": { "type": "string" },
+        "pasanganNama": { "type": "string" },
+        "jenisMurojaah": { "type": "string" },
+        "elemenNama": { "type": "string" },
+        "modulId": { "type": "string" },
+        "modulNama": { "type": "string" },
+        "suratAwal": { "type": "string" },
+        "suratAkhir": { "type": "string" },
+        "ayatAwal": { "type": "string" },
+        "ayatAkhir": { "type": "string" },
+        "catatan": { "type": "string" },
+        "catatanGuru": { "type": "string" },
+        "statusVerifikasi": { "type": "string" },
+        "statusPasangan": { "type": "string" }
+      },
+      "required": ["id", "tanggal", "siswaId", "siswaNama", "pasanganId", "pasanganNama", "jenisMurojaah", "statusVerifikasi", "statusPasangan"]
+    },
+    "JenisAssessment": {
+      "title": "JenisAssessment",
+      "description": "Category list of various formal assessments",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "elemenId": { "type": "string" },
+        "elemenNama": { "type": "string" },
+        "kategori": { "type": "string" },
+        "namaAssessment": { "type": "string" },
+        "deskripsi": { "type": "string" },
+        "statusAktif": { "type": "boolean" }
+      },
+      "required": ["id", "elemenId", "kategori", "namaAssessment", "statusAktif"]
+    },
+    "TemplateAssessment": {
+      "title": "TemplateAssessment",
+      "description": "Evaluation rubrics templates configured by admin",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "namaTemplate": { "type": "string" },
+        "jenisAssessmentId": { "type": "string" },
+        "namaJenisAssessment": { "type": "string" },
+        "petunjukPelaksanaan": { "type": "string" },
+        "rubrikPenilaian": { "type": "array" },
+        "syaratKelulusan": { "type": "object" }
+      },
+      "required": ["id", "namaTemplate", "jenisAssessmentId", "rubrikPenilaian", "syaratKelulusan"]
+    },
+    "AssessmentRecord": {
+      "title": "AssessmentRecord",
+      "description": "Formal test performance notes, records, and approvals of students",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "siswaId": { "type": "string" },
+        "siswaNama": { "type": "string" },
+        "siswaNis": { "type": "string" },
+        "halaqahId": { "type": "string" },
+        "halaqahNama": { "type": "string" },
+        "jenisAssessmentId": { "type": "string" },
+        "namaAssessment": { "type": "string" },
+        "kategori": { "type": "string" },
+        "elemenId": { "type": "string" },
+        "elemenNama": { "type": "string" },
+        "templateId": { "type": "string" },
+        "guruId": { "type": "string" },
+        "guruNama": { "type": "string" },
+        "tanggalAssessment": { "type": "string" },
+        "rubrikNilaiInput": { "type": "array" },
+        "kesalahanFatal": { "type": "boolean" },
+        "catatanGuru": { "type": "string" },
+        "rekomendasiLayak": { "type": "string" },
+        "nilaiAkhir": { "type": "number" },
+        "statusHasil": { "type": "string" },
+        "tanggalDibuat": { "type": "string" }
+      },
+      "required": ["id", "siswaId", "siswaNama", "jenisAssessmentId", "namaAssessment", "guruId", "nilaiAkhir", "statusHasil", "tanggalAssessment"]
+    },
+    "Syahadah": {
+      "title": "Syahadah",
+      "description": "Formally awarded certificate records on passing evaluations",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "siswaId": { "type": "string" },
+        "siswaNama": { "type": "string" },
+        "siswaNis": { "type": "string" },
+        "assessmentRecordId": { "type": "string" },
+        "namaAssessment": { "type": "string" },
+        "kategori": { "type": "string" },
+        "nilaiAkhir": { "type": "number" },
+        "predikat": { "type": "string" },
+        "nomorSertifikat": { "type": "string" },
+        "tanggalTerbit": { "type": "string" },
+        "ttdNama": { "type": "string" },
+        "ttdJabatan": { "type": "string" }
+      },
+      "required": ["id", "siswaId", "siswaNama", "nomorSertifikat", "tanggalTerbit"]
+    },
+    "PengajuanAssessment": {
+      "title": "PengajuanAssessment",
+      "description": "Assessment exam requests submitted by tutors for official examiners to test",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "siswaId": { "type": "string" },
+        "siswaNama": { "type": "string" },
+        "siswaNis": { "type": "string" },
+        "halaqahId": { "type": "string" },
+        "halaqahNama": { "type": "string" },
+        "targetJuzAtauJilid": { "type": "string" },
+        "jenisAssessmentId": { "type": "string" },
+        "jenisAssessmentNama": { "type": "string" },
+        "templateAssessmentId": { "type": "string" },
+        "templateAssessmentNama": { "type": "string" },
+        "pengajuGuruId": { "type": "string" },
+        "pengajuGuruNama": { "type": "string" },
+        "pengujiGuruId": { "type": "string" },
+        "pengujiGuruNama": { "type": "string" },
+        "tanggalPengajuan": { "type": "string" },
+        "status": { "type": "string", "enum": ["Pending", "Selesai", "Ditolak"] },
+        "catatanGuru": { "type": "string" },
+        "catatanPenguji": { "type": "string" },
+        "nilaiAkhir": { "type": "number" },
+        "statusHasil": { "type": "string" }
+      },
+      "required": ["id", "siswaId", "siswaNama", "targetJuzAtauJilid", "jenisAssessmentId", "templateAssessmentId", "pengajuGuruId", "pengujiGuruId", "status", "tanggalPengajuan"]
+    },
+    "MataPelajaran": {
+      "title": "MataPelajaran",
+      "description": "Subjects containing multiple evaluation elements",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "nama": { "type": "string" },
+        "statusAktif": { "type": "boolean" },
+        "deskripsi": { "type": "string" },
+        "elemenList": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": { "type": "string" },
+              "nama": { "type": "string" },
+              "deskripsi": { "type": "string" },
+              "statusAktif": { "type": "boolean" }
+            },
+            "required": ["id", "nama", "statusAktif"]
+          }
+        },
+        "tanggalDibuat": { "type": "string" }
+      },
+      "required": ["id", "nama", "statusAktif"]
+    },
+    "TajwidCategory": {
+      "title": "TajwidCategory",
+      "description": "Categories for tajwid error classification and real-time guidance",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "nama": { "type": "string" },
+        "deskripsi": { "type": "string" }
+      },
+      "required": ["id", "nama"]
+    },
+    "ProgramKeilmuan": {
+      "title": "ProgramKeilmuan",
+      "description": "Program Keilmuan / LMS course specification",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "nama": { "type": "string" },
+        "kategori": { "type": "string" },
+        "deskripsi": { "type": "string" },
+        "tujuan": { "type": "string" },
+        "sasaran": { "type": "string" },
+        "kkm": { "type": "number" },
+        "bertahap": { "type": "boolean" },
+        "latihan": { "type": "boolean" },
+        "asesmenPraktik": { "type": "boolean" },
+        "remedial": { "type": "boolean" },
+        "ujianAkhir": { "type": "boolean" },
+        "sertifikat": { "type": "boolean" },
+        "status": { "type": "string" },
+        "tanggalDibuat": { "type": "string" }
+      },
+      "required": ["id", "nama", "kategori", "status"]
+    },
+    "ProgramBab": {
+      "title": "ProgramBab",
+      "description": "Chapter/Bab under a Program Keilmuan",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "programId": { "type": "string" },
+        "judul": { "type": "string" },
+        "tujuanPembelajaran": { "type": "string" },
+        "indikator": { "type": "string" },
+        "estimasiWaktu": { "type": "string" },
+        "urutan": { "type": "number" }
+      },
+      "required": ["id", "programId", "judul", "urutan"]
+    },
+    "ProgramMateri": {
+      "title": "ProgramMateri",
+      "description": "Learning material/Materi under a Program Bab",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "babId": { "type": "string" },
+        "programId": { "type": "string" },
+        "judul": { "type": "string" },
+        "tipe": { "type": "string" },
+        "modulId": { "type": "string" },
+        "cetakInfo": { "type": "object" },
+        "urutan": { "type": "number" }
+      },
+      "required": ["id", "babId", "programId", "judul", "tipe", "urutan"]
+    },
+    "ProgramLatihan": {
+      "title": "ProgramLatihan",
+      "description": "Practice questions under a Program Bab",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "babId": { "type": "string" },
+        "programId": { "type": "string" },
+        "tipe": { "type": "string" },
+        "pertanyaan": { "type": "string" },
+        "opsi": { "type": "array" },
+        "jawabanBenar": { "type": "string" },
+        "urutan": { "type": "number" }
+      },
+      "required": ["id", "babId", "programId", "tipe", "pertanyaan", "urutan"]
+    },
+    "ProgramAsesmenKognitifQuestion": {
+      "title": "ProgramAsesmenKognitifQuestion",
+      "description": "Cognitive assessment questions under a Program Bab",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "babId": { "type": "string" },
+        "programId": { "type": "string" },
+        "tipe": { "type": "string" },
+        "pertanyaan": { "type": "string" },
+        "opsi": { "type": "array" },
+        "jawabanBenar": { "type": "string" },
+        "bobot": { "type": "number" },
+        "urutan": { "type": "number" }
+      },
+      "required": ["id", "babId", "programId", "tipe", "pertanyaan", "urutan"]
+    },
+    "ProgramAsesmenKognitifSetting": {
+      "title": "ProgramAsesmenKognitifSetting",
+      "description": "Cognitive assessment configuration under a Program Bab",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "programId": { "type": "string" },
+        "babId": { "type": "string" },
+        "jumlahSoal": { "type": "number" },
+        "durasi": { "type": "number" },
+        "acakSoal": { "type": "boolean" },
+        "acakJawaban": { "type": "boolean" },
+        "bobotNilai": { "type": "number" }
+      },
+      "required": ["id", "programId", "babId", "jumlahSoal", "durasi"]
+    },
+    "ProgramAsesmenPraktikSetting": {
+      "title": "ProgramAsesmenPraktikSetting",
+      "description": "Practical assessment configuration under a Program Bab",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "programId": { "type": "string" },
+        "babId": { "type": "string" },
+        "tipePraktik": { "type": "string" },
+        "metodePelaksanaan": { "type": "string" },
+        "tugasTipe": { "type": "string" },
+        "tugasPetunjuk": { "type": "string" },
+        "aspekPenilaian": { "type": "object" }
+      },
+      "required": ["id", "programId", "babId", "tipePraktik", "metodePelaksanaan"]
+    },
+    "ProgramEnrollment": {
+      "title": "ProgramEnrollment",
+      "description": "Student enrollment record for Program Keilmuan",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "programId": { "type": "string" },
+        "programNama": { "type": "string" },
+        "siswaId": { "type": "string" },
+        "siswaNama": { "type": "string" },
+        "siswaNis": { "type": "string" },
+        "halaqahId": { "type": "string" },
+        "halaqahNama": { "type": "string" },
+        "status": { "type": "string" },
+        "tanggalDaftar": { "type": "string" },
+        "progressPercent": { "type": "number" },
+        "babProgress": { "type": "object" }
+      },
+      "required": ["id", "programId", "siswaId", "status", "tanggalDaftar"]
+    },
+    "AppSettings": {
+      "title": "AppSettings",
+      "description": "Application settings and templates",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "mode": { "type": "string" },
+        "primaryHex": { "type": "string" },
+        "secondaryHex": { "type": "string" },
+        "presetId": { "type": "string" },
+        "lockInstitutionTheme": { "type": "boolean" }
+      }
+    },
+    "Pengumuman": {
+      "title": "Pengumuman",
+      "description": "Broadcast announcements and dashboard noticeboard entries",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "judul": { "type": "string" },
+        "konten": { "type": "string" },
+        "targetAudiens": { "type": "string", "enum": ["ALL", "GURU", "SISWA"] },
+        "kategori": { "type": "string", "enum": ["INFO_UMUM", "AKADEMIK", "URGENT", "AGENDA", "LIBUR", "PENGINGAT"] },
+        "isPinned": { "type": "boolean" },
+        "isPublished": { "type": "boolean" },
+        "tanggalMulai": { "type": "string" },
+        "tanggalSelesai": { "type": "string" },
+        "lampiranUrl": { "type": "string" },
+        "lampiranNama": { "type": "string" },
+        "lampiranTipe": { "type": "string" },
+        "authorId": { "type": "string" },
+        "authorNama": { "type": "string" },
+        "authorRole": { "type": "string" },
+        "dibacaOleh": { "type": "array", "items": { "type": "string" } },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["id", "judul", "konten", "targetAudiens", "kategori", "isPublished", "authorId", "authorNama", "createdAt"]
+    },
+    "CapaianPembelajaran": {
+      "title": "CapaianPembelajaran",
+      "description": "Learning achievements master data for teacher administration and RPP",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "mataPelajaranId": { "type": "string" },
+        "mataPelajaranNama": { "type": "string" },
+        "fase": { "type": "string" },
+        "jenjang": { "type": "string" },
+        "kodeCP": { "type": "string" },
+        "elemen": { "type": "string" },
+        "deskripsi": { "type": "string" },
+        "tanggalDibuat": { "type": "string" }
+      },
+      "required": ["id", "mataPelajaranId", "fase", "kodeCP", "deskripsi"]
+    },
+    "TujuanPembelajaran": {
+      "title": "TujuanPembelajaran",
+      "description": "Learning objectives under learning achievements",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "capaianPembelajaranId": { "type": "string" },
+        "kodeTP": { "type": "string" },
+        "judul": { "type": "string" },
+        "indikator": { "type": "array" },
+        "alokasiWaktu": { "type": "string" },
+        "tanggalDibuat": { "type": "string" }
+      },
+      "required": ["id", "capaianPembelajaranId", "kodeTP", "judul"]
+    },
+    "BankAktivitasPembelajaran": {
+      "title": "BankAktivitasPembelajaran",
+      "description": "Preset of teaching activity steps and rubrics",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "kategori": { "type": "string" },
+        "judul": { "type": "string" },
+        "deskripsi": { "type": "string" },
+        "langkahLangkah": { "type": "array" },
+        "estimasiMenit": { "type": "number" },
+        "tags": { "type": "array" }
+      },
+      "required": ["id", "kategori", "judul", "langkahLangkah"]
+    },
+    "RppTemplateAdmin": {
+      "title": "RppTemplateAdmin",
+      "description": "Master official lesson plan templates created by admin",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "judul": { "type": "string" },
+        "mataPelajaranId": { "type": "string" },
+        "fase": { "type": "string" },
+        "capaianPembelajaranId": { "type": "string" },
+        "tujuanPembelajaranDipilih": { "type": "array" },
+        "kegiatanPembukaan": { "type": "array" },
+        "kegiatanInti": { "type": "array" },
+        "kegiatanPenutup": { "type": "array" },
+        "mediaDanAlat": { "type": "array" },
+        "sumberBelajar": { "type": "array" },
+        "asesmenMetode": { "type": "array" },
+        "alokasiWaktu": { "type": "string" },
+        "tanggalDibuat": { "type": "string" }
+      },
+      "required": ["id", "judul", "mataPelajaranId", "fase", "capaianPembelajaranId"]
+    },
+    "GuruRppDokumen": {
+      "title": "GuruRppDokumen",
+      "description": "Lesson plan document crafted by teacher for a specific halaqah",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "guruId": { "type": "string" },
+        "guruNama": { "type": "string" },
+        "mataPelajaranId": { "type": "string" },
+        "mataPelajaranNama": { "type": "string" },
+        "fase": { "type": "string" },
+        "kelasAtauHalaqah": { "type": "string" },
+        "semester": { "type": "string" },
+        "pertemuanKe": { "type": "number" },
+        "alokasiWaktu": { "type": "string" },
+        "tanggalPelaksanaan": { "type": "string" },
+        "capaianPembelajaranId": { "type": "string" },
+        "capaianPembelajaranDeskripsi": { "type": "string" },
+        "tujuanPembelajaranDipilih": { "type": "array" },
+        "materiPokok": { "type": "string" },
+        "kegiatanPembukaan": { "type": "array" },
+        "kegiatanInti": { "type": "array" },
+        "kegiatanPenutup": { "type": "array" },
+        "mediaDanAlat": { "type": "array" },
+        "sumberBelajar": { "type": "array" },
+        "asesmenMetode": { "type": "array" },
+        "refleksiGuru": { "type": "string" },
+        "status": { "type": "string" },
+        "tanggalDibuat": { "type": "string" }
+      },
+      "required": ["id", "guruId", "guruNama", "mataPelajaranId", "fase", "kelasAtauHalaqah", "capaianPembelajaranId", "status", "tanggalDibuat"]
+    }
+  },
+  "firestore": {
+    "admins/{adminId}": {
+      "schema": "Admin",
+      "description": "Collection of all authorized administrative accounts"
+    },
+    "gurus/{guruId}": {
+      "schema": "Guru",
+      "description": "Collection of all registered teachers or ustadz"
+    },
+    "siswas/{siswaId}": {
+      "schema": "Siswa",
+      "description": "Collection of all enrolled students or santris"
+    },
+    "kelases/{kelasId}": {
+      "schema": "Kelas",
+      "description": "Collection of academic class configurations"
+    },
+    "halaqahs/{halaqahId}": {
+      "schema": "Halaqah",
+      "description": "Collection of active halaqah circles under teachers"
+    },
+    "moduls/{modulId}": {
+      "schema": "Modul",
+      "description": "Collection of teaching materials and syllabi"
+    },
+    "setorans/{setoranId}": {
+      "schema": "Setoran",
+      "description": "Collection of learning achievements and student memorization logs"
+    },
+    "auditLogs/{logId}": {
+      "schema": "AuditLog",
+      "description": "Collection of high level operational activities tracking"
+    },
+    "chatMessages/{messageId}": {
+      "schema": "ChatMessage",
+      "description": "Collection of real-time communication messages"
+    },
+    "virtualMeetings/{meetingId}": {
+      "schema": "VirtualMeeting",
+      "description": "Collection of interactive video conference sessions"
+    },
+    "elemenSettings/{settingId}": {
+      "schema": "ElemenSetting",
+      "description": "Collection of customizable grading parameter metrics"
+    },
+    "shared_states/{shareId}": {
+      "schema": "SharedState",
+      "description": "Collection of compressed database snapshots for transfer states"
+    },
+    "modulPages/{pageId}": {
+      "schema": "ModulPage",
+      "description": "Collection of individual high-res image page chunks for teaching materials to fit Firestore limits"
+    },
+    "test_connection_ping/{pingId}": {
+      "schema": "PingConnection",
+      "description": "Collection used for database ping status checks"
+    },
+    "murojaahBerpasangans/{murojaahId}": {
+      "schema": "MurojaahBerpasangan",
+      "description": "Collection of partnered student murojaah logs"
+    },
+    "jenisAssessments/{id}": {
+      "schema": "JenisAssessment",
+      "description": "Collection of formal assessment categories"
+    },
+    "templateAssessments/{id}": {
+      "schema": "TemplateAssessment",
+      "description": "Collection of evaluation templates and grading rubrics"
+    },
+    "assessmentRecords/{id}": {
+      "schema": "AssessmentRecord",
+      "description": "Collection of student assessment records and scores"
+    },
+    "syahadahs/{id}": {
+      "schema": "Syahadah",
+      "description": "Collection of officially awarded syahadah certificates on passing assessments"
+    },
+    "pengajuan_assessments/{id}": {
+      "schema": "PengajuanAssessment",
+      "description": "Collection of tutor requests for student exams"
+    },
+    "syahadahRules/{id}": {
+      "schema": "TemplateAssessment",
+      "description": "Collection of syahadah rules and standards"
+    },
+    "mataPelajarans/{id}": {
+      "schema": "MataPelajaran",
+      "description": "Collection of subjects with nested elements"
+    },
+    "tajwidCategories/{id}": {
+      "schema": "TajwidCategory",
+      "description": "Collection of tajwid error categories and rules"
+    },
+    "programs/{id}": {
+      "schema": "ProgramKeilmuan",
+      "description": "Collection of Program Keilmuan specifications"
+    },
+    "programBabs/{id}": {
+      "schema": "ProgramBab",
+      "description": "Collection of Program Babs (chapters)"
+    },
+    "programMateris/{id}": {
+      "schema": "ProgramMateri",
+      "description": "Collection of learning materials"
+    },
+    "programLatihans/{id}": {
+      "schema": "ProgramLatihan",
+      "description": "Collection of practice questions"
+    },
+    "programAsesmens/{id}": {
+      "schema": "ProgramAsesmenKognitifQuestion",
+      "description": "Collection of cognitive assessment questions"
+    },
+    "programAsesmenSettings/{id}": {
+      "schema": "ProgramAsesmenKognitifSetting",
+      "description": "Collection of cognitive assessment configurations"
+    },
+    "programPraktikSettings/{id}": {
+      "schema": "ProgramAsesmenPraktikSetting",
+      "description": "Collection of practical assessment configurations"
+    },
+    "programEnrollments/{id}": {
+      "schema": "ProgramEnrollment",
+      "description": "Collection of student course enrollment records"
+    },
+    "appSettings/{id}": {
+      "schema": "AppSettings",
+      "description": "Collection of app configuration and templates"
+    },
+    "pengumumans/{id}": {
+      "schema": "Pengumuman",
+      "description": "Collection of broadcast announcement records"
+    },
+    "capaianPembelajarans/{id}": {
+      "schema": "CapaianPembelajaran",
+      "description": "Collection of Capaian Pembelajaran (CP) master records"
+    },
+    "tujuanPembelajarans/{id}": {
+      "schema": "TujuanPembelajaran",
+      "description": "Collection of Tujuan Pembelajaran (TP) records"
+    },
+    "bankAktivitas/{id}": {
+      "schema": "BankAktivitasPembelajaran",
+      "description": "Collection of preset teaching activities and steps"
+    },
+    "rppTemplates/{id}": {
+      "schema": "RppTemplateAdmin",
+      "description": "Collection of official master RPP templates"
+    },
+    "guruRppList/{id}": {
+      "schema": "GuruRppDokumen",
+      "description": "Collection of teacher RPP / Modul Ajar lesson documents"
+    },
+    "capaianBacaanConfigs/{id}": {
+      "description": "Master target per ayat lafaz untuk instrumen capaian bacaan ayat"
+    },
+    "capaianBacaanSesiList/{id}": {
+      "description": "Rekam jejak sesi pertemuan talaqqi santri per ayat dan butir target"
+    },
+    "capaianBacaanTrialSettings/{id}": {
+      "description": "Konfigurasi whitelist guru uji coba dan elemen pembelajaran terpilih"
+    }
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "name": "Monitoring Halaqah",
+  "description": "Sistem modern monitoring progres halaqah Al-Qur'an dan bimbingan, dilengkapi statistik interaktif, manajemen data guru, siswa, kelas, modul pembelajaran, bimbingan setoran, serta sistem multi-peran (Admin, Guru, Siswa).",
+  "requestFramePermissions": ["camera", "microphone"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

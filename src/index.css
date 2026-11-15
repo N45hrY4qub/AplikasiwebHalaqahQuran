@@ -1,0 +1,286 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&family=Amiri+Quran&family=Amiri:ital,wght@0,400;0,700;1,400;1,700&family=Scheherazade+New:wght@400;700&family=Lateef:wght@400;700&family=Noto+Naskh+Arabic:wght@400;700&family=Reem+Kufi:wght@400;700&display=swap');
+@import "tailwindcss";
+
+@variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans: "Plus Jakarta Sans", "MajmaMalikFahd", "Amiri Quran", "Amiri", "Noto Naskh Arabic", "Scheherazade New", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-mono: "JetBrains Mono", "MajmaMalikFahd", "Amiri Quran", ui-monospace, monospace;
+}
+
+/* Sleek dark/light custom scrollbar */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: rgba(148, 163, 184, 0.12);
+  border-radius: 8px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.45);
+  border-radius: 8px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(100, 116, 139, 0.75);
+}
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(148, 163, 184, 0.45) rgba(148, 163, 184, 0.12);
+}
+
+/* Hide scrollbar utility while maintaining touch & mouse scrolling */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Ensure proper Arabic letter connection, direction and shaping in raw html output */
+.page-html-output {
+  unicode-bidi: plaintext !important; /* Extremely important for automatic paragraph-level direction detection! */
+  text-align: start !important; /* Forces correct RTL / LTR start alignment !*/
+}
+
+/* Fallback fonts specifically supporting Arabic shaping correctly */
+.page-html-output, .page-html-output * {
+  font-family: "Plus Jakarta Sans", "MajmaMalikFahd", "Inter", "Amiri Quran", "Amiri", "Noto Naskh Arabic", "Scheherazade New", "Lateef", system-ui, -apple-system, sans-serif;
+  text-rendering: optimizeLegibility;
+  font-feature-settings: "liga" on, "clig" on, "calt" on, "ccmp" on, "mark" on, "mkmk" on;
+}
+
+/* Optimize line-height and size for popular Arabic fonts to prevent harakat (diacritics) from clipping */
+.page-html-output [style*="font-family: Amiri"], .page-html-output [style*="font-family: 'Amiri'"],
+.page-html-output [style*="font-family: Noto Naskh Arabic"], .page-html-output [style*="font-family: 'Noto Naskh Arabic'"],
+.page-html-output [style*="font-family: Scheherazade New"], .page-html-output [style*="font-family: 'Scheherazade New'"],
+.page-html-output [style*="font-family: Lateef"], .page-html-output [style*="font-family: 'Lateef'"] {
+  line-height: 2.3 !important;
+}
+
+/* Explicitly support RTL formatting blocks inside the editorial HTML outputs */
+.page-html-output [dir="rtl"] {
+  direction: rtl !important;
+  text-align: right !important;
+  unicode-bidi: plaintext !important;
+}
+
+.page-html-output [dir="ltr"] {
+  direction: ltr !important;
+  text-align: left !important;
+  unicode-bidi: plaintext !important;
+}
+
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 8mm 10mm 8mm 10mm;
+  }
+
+  html, body {
+    background: #ffffff !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: 100% !important;
+    overflow: visible !important;
+  }
+
+  /* Hide screen elements by default */
+  body * {
+    visibility: hidden !important;
+  }
+
+  /* When printing koreksi, collapse #root completely so it occupies 0px vertical height */
+  body.is-printing-koreksi #root,
+  body.modal-koreksi-open #root,
+  body:has(#riwayat-koreksi-modal) #root {
+    display: none !important;
+    height: 0 !important;
+    max-height: 0 !important;
+    overflow: hidden !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  /* Completely collapse fixed modal containers and parent wrappers so they occupy 0 vertical space */
+  #berita-acara-overlay,
+  #berita-acara-overlay-admin,
+  #syahadah-certificate-paper,
+  #syahadah-certificate-overlay,
+  #syahadah-overlay,
+  #syahadah-overlay-admin,
+  .fixed:not(#riwayat-koreksi-modal) {
+    position: static !important;
+    display: block !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    width: 100% !important;
+    height: 0 !important;
+    min-height: 0 !important;
+    max-height: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    border: none !important;
+    transform: none !important;
+    overflow: hidden !important;
+  }
+
+  .my-auto, .m-auto, .my-0, .mx-auto {
+    margin: 0 !important;
+  }
+
+  /* Target Print Documents - make them and their children visible */
+  #mh-report-print-document, #mh-report-print-document *,
+  #koreksi-print-document, #koreksi-print-document *,
+  #riwayat-koreksi-modal, #riwayat-koreksi-modal *,
+  #syahadah-print-target-canvas, #syahadah-print-target-canvas *,
+  #syahadah-print-container, #syahadah-print-container * {
+    visibility: visible !important;
+  }
+
+  /* Position the single-page paper element flush at top-left (0,0) of Page 1 */
+  #mh-report-print-document,
+  #syahadah-print-target-canvas,
+  #syahadah-print-container {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    height: auto !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: none !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    background: #ffffff !important;
+    color: #000000 !important;
+    z-index: 99999999 !important;
+    overflow: visible !important;
+    transform: none !important;
+  }
+
+  /* Riwayat Koreksi Live Print: Support Multi-Page & Full Content starting cleanly at the top of Page 1 */
+  #riwayat-koreksi-modal {
+    position: static !important;
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    height: auto !important;
+    min-height: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    background: #ffffff !important;
+  }
+
+  #riwayat-koreksi-modal > div {
+    max-width: 100% !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: auto !important;
+    max-height: none !important;
+    box-shadow: none !important;
+    border: none !important;
+    border-radius: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: visible !important;
+    background: #ffffff !important;
+  }
+
+  #koreksi-print-document {
+    position: static !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    height: auto !important;
+    min-height: auto !important;
+    max-height: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: none !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    background: #ffffff !important;
+    color: #000000 !important;
+    overflow: visible !important;
+  }
+
+  .koreksi-list-scroll {
+    max-height: none !important;
+    height: auto !important;
+    overflow: visible !important;
+    padding-right: 0 !important;
+  }
+
+  .koreksi-item-card {
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+  }
+
+  body.is-printing-koreksi html,
+  body.is-printing-koreksi,
+  body.modal-koreksi-open {
+    height: auto !important;
+    min-height: 100% !important;
+    max-height: none !important;
+    overflow: visible !important;
+  }
+
+  .print\:hidden {
+    display: none !important;
+  }
+
+  /* Refine internal document spacing for print so the document fits on 1 page without artificial page splits */
+  .mh-print-paper {
+    font-size: 11px !important;
+    line-height: 1.4 !important;
+    background: #ffffff !important;
+  }
+
+  .mh-print-paper .p-8,
+  .mh-print-paper .p-12,
+  .mh-print-paper .md\:p-12 {
+    padding: 0 !important;
+  }
+
+  .mh-print-paper .border-\[12px\],
+  .mh-print-paper .border-\[16px\] {
+    border: none !important;
+  }
+
+  .mh-print-paper .space-y-6 > * + * {
+    margin-top: 0.6rem !important;
+  }
+
+  .mh-print-paper .space-y-3\.5 > * + * {
+    margin-top: 0.3rem !important;
+  }
+
+  .mh-print-paper .pt-8 {
+    padding-top: 0.75rem !important;
+  }
+
+  .mh-print-paper .pb-4 {
+    padding-bottom: 0.35rem !important;
+  }
+
+  .mh-print-paper .py-2 {
+    padding-top: 0.25rem !important;
+    padding-bottom: 0.25rem !important;
+  }
+
+  /* Avoid page breaks inside logical document sections */
+  .mh-print-paper table,
+  .mh-print-paper .border,
+  .mh-print-paper .grid,
+  .mh-print-paper blockquote {
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+  }
+}
+
