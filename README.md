@@ -1,5 +1,3 @@
-# AplikasiHalaqah
-Sistem Informasi Manajemen & Monitoring Halaqah Al-Quran
 # Sistem Informasi Halaqah Al-Qur'an (Web App)
 
 Aplikasi berbasis web untuk memantau kegiatan halaqah Al-Qur'an, setoran hafalan (tahfidz), bacaan (tilawah), absensi, kurikulum & modul, syahadah, serta administrasi lembaga pendidikan Al-Qur'an.
