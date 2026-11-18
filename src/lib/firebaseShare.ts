@@ -10,7 +10,9 @@ import {
   memoryLocalCache,
   setLogLevel 
 } from 'firebase/firestore';
-import defaultFirebaseConfig from '../../firebase-applet-config.json';
+const configModules = import.meta.glob('../../firebase-applet-config.json', { eager: true });
+const defaultFirebaseConfig: Record<string, any> =
+  (configModules['../../firebase-applet-config.json'] as { default?: Record<string, any> } | undefined)?.default || {};
 
 // Silence non-critical Firestore internal transport warnings (such as 10s initial connection delay warning in sandbox)
 try {
